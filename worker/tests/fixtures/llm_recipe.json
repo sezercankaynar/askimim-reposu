@@ -1,0 +1,7 @@
+{"found":true,"title":"Islak Kek","category":"Tatlılar","subcategory":"Kekler & kurabiyeler","servings":8,"time_text":"50 dk",
+"ingredients":[{"name":"un","amount":2,"amount_max":null,"unit":"su bardağı","note":null,"group":null,"estimated":false,"confidence":0.95},
+{"name":"toz şeker","amount":1,"amount_max":null,"unit":"su bardağı","note":null,"group":null,"estimated":false,"confidence":0.95},
+{"name":"yumurta","amount":3,"amount_max":null,"unit":"adet","note":null,"group":null,"estimated":false,"confidence":0.95},
+{"name":"kakao","amount":3,"amount_max":null,"unit":"yemek kaşığı","note":null,"group":null,"estimated":true,"confidence":0.5}],
+"steps":["Yumurta ve şekeri çırp.","Yağı ekle.","Kuru malzemeleri ekleyip karıştır.","180 derecede 35 dakika pişir."],
+"notes":null,"cover_frame_index":null,"confidence":{"title":0.98,"servings":0.5,"time":0.7,"ingredients":0.9,"steps":0.9,"category":0.95}}

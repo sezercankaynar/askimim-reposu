@@ -30,10 +30,10 @@ async def run_forever() -> None:
                 continue  # hemen bir sonrakine bak
         except asyncio.CancelledError:
             raise
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             log.exception("queue.error", error=str(exc))
         _wake.clear()
         try:
             await asyncio.wait_for(_wake.wait(), timeout=settings.worker_poll_seconds)
-        except asyncio.TimeoutError:
+        except TimeoutError:
             pass
