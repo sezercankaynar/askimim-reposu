@@ -1,0 +1,20 @@
+{
+  "name": "Tarif Defterim",
+  "short_name": "Tarif Defterim",
+  "description": "Linki yapıştır, tarif deftere otomatik eklensin.",
+  "start_url": "/defter",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#e9e1d2",
+  "theme_color": "#7a3b2e",
+  "lang": "tr",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "GET",
+    "params": { "title": "title", "text": "text", "url": "url" }
+  }
+}

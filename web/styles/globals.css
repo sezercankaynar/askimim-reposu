@@ -1,0 +1,472 @@
+/* ===== Tarif Defterim – tasarım sistemi ===== */
+:root {
+  /* bez cilt */
+  --cloth: #7a3b2e;
+  --cloth-dark: #5a281f;
+  --cloth-light: #9a4d3c;
+  --cloth-thread: rgba(255, 255, 255, 0.08);
+  /* kâğıt */
+  --paper: #fbf7ee;
+  --paper-2: #f4eddd;
+  --paper-line: #cfd8e6;
+  --paper-margin: #e8a5a5;
+  --ink: #2b2420;
+  --ink-soft: #6b5f57;
+  --ink-faint: #a69a90;
+  --accent: #b5543c;
+  --accent-soft: #f3d9cf;
+  --ok: #3f7a4f;
+  --ok-soft: #dcefe0;
+  --warn: #b7791f;
+  --warn-soft: #fbeccd;
+  --danger: #b03a2e;
+  --danger-soft: #f8dcd8;
+  --shadow: 0 10px 30px rgba(43, 36, 32, 0.18);
+  --shadow-sm: 0 2px 8px rgba(43, 36, 32, 0.12);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --line-h: 32px;
+  --tap: 44px;
+  --font-display: var(--font-fraunces), "Georgia", serif;
+  --font-hand: var(--font-caveat), "Segoe Script", cursive;
+  --font-body: var(--font-nunito), system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  background: #e9e1d2;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  background: none;
+  min-height: var(--tap);
+  min-width: var(--tap);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.hand {
+  font-family: var(--font-hand);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ===== Sayfa iskeleti ===== */
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 12px 96px;
+}
+
+/* çizgili kâğıt sayfa */
+.paper {
+  position: relative;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(to right, transparent 44px, var(--paper-margin) 44px, var(--paper-margin) 45px, transparent 45px),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--line-h) - 1px),
+      var(--paper-line) calc(var(--line-h) - 1px),
+      var(--paper-line) var(--line-h)
+    );
+  background-position: 0 0, 0 18px;
+  border-radius: 4px 14px 14px 4px;
+  box-shadow: var(--shadow);
+  padding: 18px 16px 24px 56px;
+  min-height: 70dvh;
+}
+
+.paper::before {
+  /* spiral delikleri */
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 24px;
+  bottom: 24px;
+  width: 12px;
+  background: radial-gradient(circle at 6px 10px, #d8cfbf 5px, transparent 6px) 0 0 / 12px 48px repeat-y;
+}
+
+.paper--plain {
+  background-image: none;
+  padding-left: 16px;
+}
+
+.paper--plain::before {
+  display: none;
+}
+
+.paper h1 {
+  font-size: 28px;
+  line-height: var(--line-h);
+  margin-bottom: var(--line-h);
+}
+
+.paper h2 {
+  font-size: 20px;
+  line-height: var(--line-h);
+}
+
+.paper p,
+.paper li {
+  line-height: var(--line-h);
+}
+
+/* ===== Butonlar ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.08s ease, filter 0.15s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--accent);
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.btn--soft {
+  background: var(--accent-soft);
+  color: var(--accent);
+  box-shadow: none;
+}
+
+.btn--danger {
+  background: var(--danger);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--paper-2);
+  font-size: 20px;
+}
+
+/* ===== Form ===== */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.field label {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid #d9cfbf;
+  background: #fff;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: 3px solid var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ===== Chip ===== */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1.5px solid #e2d8c8;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.chip[aria-pressed="true"],
+.chip--active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.chip-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0 8px;
+  scrollbar-width: none;
+}
+
+.chip-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== Rozetler ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.badge--review {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.badge--made {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+
+.badge--estimated {
+  background: var(--paper-2);
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+/* ===== Polaroid kart ===== */
+.polaroid {
+  background: #fff;
+  padding: 8px 8px 12px;
+  box-shadow: var(--shadow-sm);
+  border-radius: 3px;
+  transform: rotate(var(--tilt, -1deg));
+  display: block;
+}
+
+.polaroid__img {
+  aspect-ratio: 1;
+  background: var(--paper-2);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+.polaroid__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.polaroid__title {
+  font-family: var(--font-hand);
+  font-size: 20px;
+  line-height: 1.1;
+  margin-top: 10px;
+  text-align: center;
+  color: var(--ink);
+}
+
+.polaroid__meta {
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+@media (min-width: 560px) {
+  .grid-2 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===== Nokta liderli içindekiler ===== */
+.toc {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc li a,
+.toc li > span {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-height: var(--tap);
+  line-height: var(--line-h);
+}
+
+.toc .toc__name {
+  flex: 0 1 auto;
+  font-weight: 700;
+}
+
+.toc .toc__dots {
+  flex: 1;
+  border-bottom: 2px dotted var(--ink-faint);
+  transform: translateY(-6px);
+}
+
+.toc .toc__num {
+  font-family: var(--font-hand);
+  font-size: 20px;
+  color: var(--accent);
+}
+
+/* ===== Bildirim ===== */
+.notice {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+.notice--error {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.notice--ok {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+
+.notice--warn {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+/* ===== Alt sekme çubuğu ===== */
+.tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--cloth);
+  color: #f7e9e3;
+  display: flex;
+  justify-content: space-around;
+  padding: 6px 0 calc(6px + env(safe-area-inset-bottom));
+  z-index: 50;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.tabbar a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 56px;
+  min-height: var(--tap);
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.tabbar a[aria-current="page"] {
+  opacity: 1;
+  color: #fff;
+}
+
+.tabbar a span:first-child {
+  font-size: 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

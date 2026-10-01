@@ -1,0 +1,31 @@
+.box {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 2px dashed var(--accent-soft);
+  margin-bottom: 20px;
+}
+
+.title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.hint {
+  margin: 2px 0 10px;
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.row input {
+  flex: 1;
+  min-width: 0;
+}
