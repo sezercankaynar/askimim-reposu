@@ -15,7 +15,7 @@ export const CATEGORIES = [
 
 export type CategorySlug = (typeof CATEGORIES)[number]["slug"];
 
-export const CATEGORY_NAMES = CATEGORIES.map((c) => c.name);
+export const CATEGORY_NAMES: string[] = CATEGORIES.map((c) => c.name);
 
 export function categoryBySlug(slug: string) {
   return CATEGORIES.find((c) => c.slug === slug);
