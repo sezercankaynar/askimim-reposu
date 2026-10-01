@@ -126,11 +126,16 @@ function JobRow({ job, userId }: { job: ImportJob; userId: string }) {
       <div className={styles.head}>
         <span aria-hidden="true">{icon}</span>
         <span className={styles.url}>{job.kind === "screenshots" ? "Ekran görüntüleri" : shortUrl(job.url)}</span>
-        {!active && (
-          <button type="button" className={styles.close} aria-label="Kaldır" onClick={() => start(() => dismissJob(job.id))} disabled={pending}>
-            ×
-          </button>
-        )}
+        <button
+          type="button"
+          className={styles.close}
+          aria-label={active ? "İşi iptal et" : "Kaldır"}
+          title={active ? "İptal et" : "Kaldır"}
+          onClick={() => start(() => dismissJob(job.id))}
+          disabled={pending}
+        >
+          ×
+        </button>
       </div>
       {active && (
         <>
@@ -139,6 +144,9 @@ function JobRow({ job, userId }: { job: ImportJob; userId: string }) {
           </div>
           <div className={styles.label}>
             <span className={styles.spinner} aria-hidden="true" /> {label}…
+            <button type="button" className={styles.cancel} onClick={() => start(() => dismissJob(job.id))} disabled={pending}>
+              İptal et
+            </button>
           </div>
         </>
       )}

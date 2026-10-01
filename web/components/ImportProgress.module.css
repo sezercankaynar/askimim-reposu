@@ -68,6 +68,17 @@
   font-size: 14px;
 }
 
+.cancel {
+  margin-left: auto;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
 .spinner {
   width: 14px;
   height: 14px;

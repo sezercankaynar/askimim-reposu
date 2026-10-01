@@ -97,8 +97,9 @@ export async function createScreenshotJob(uploadPaths: string[], sourceUrl: stri
   return { ok: true, jobId: data.id };
 }
 
+/** İşi listeden kaldırır; bekleyen/devam eden işler de iptal edilmiş olur (worker satırı bulamayınca sonucu yazamaz). */
 export async function dismissJob(jobId: string): Promise<void> {
   const supabase = await createClient();
-  await supabase.from("import_jobs").delete().eq("id", jobId).in("status", ["done", "failed", "duplicate"]);
+  await supabase.from("import_jobs").delete().eq("id", jobId);
   revalidatePath("/defter");
 }
