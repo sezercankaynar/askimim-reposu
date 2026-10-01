@@ -37,15 +37,25 @@ create unique index if not exists recipes_user_source_idx
   on public.recipes (user_id, source_normalized_url)
   where source_normalized_url is not null;
 
--- Arama: başlık + malzeme adları
-alter table public.recipes
-  add column if not exists search_text text
-  generated always as (
-    lower(title || ' ' || coalesce(notes, '') || ' ' || (
+-- Arama: başlık + notlar + malzeme adları (tetikleyici ile güncel tutulur)
+alter table public.recipes add column if not exists search_text text not null default '';
+
+create or replace function public.recipes_search_text() returns trigger
+language plpgsql as $$
+begin
+  new.search_text := lower(
+    new.title || ' ' || coalesce(new.notes, '') || ' ' || (
       select coalesce(string_agg(i->>'name', ' '), '')
-      from jsonb_array_elements(ingredients) i
-    ))
-  ) stored;
+      from jsonb_array_elements(coalesce(new.ingredients, '[]'::jsonb)) i
+    )
+  );
+  return new;
+end $$;
+
+drop trigger if exists recipes_search_text on public.recipes;
+create trigger recipes_search_text before insert or update of title, notes, ingredients on public.recipes
+  for each row execute function public.recipes_search_text();
+
 create index if not exists recipes_search_idx on public.recipes using gin (to_tsvector('simple', search_text));
 
 -- ---------- import_jobs ----------
