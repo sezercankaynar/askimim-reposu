@@ -31,14 +31,14 @@ export default function SourceEmbed({
     <div style={{ margin: "0 0 12px", fontSize: 14 }}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", color: "var(--ink-soft)" }}>
         <span>Kaynak:</span>
-        <a href={url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline", color: "var(--accent)" }}>
+        <a href={url} target="_blank" rel="noopener noreferrer" className="link-inline" style={{ color: "var(--accent)" }}>
           {label}
         </a>
         {author && (
           <>
             <span>·</span>
             {authorUrl ? (
-              <a href={authorUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>
+              <a href={authorUrl} target="_blank" rel="noopener noreferrer" className="link-inline">
                 {author}
               </a>
             ) : (
@@ -47,7 +47,7 @@ export default function SourceEmbed({
           </>
         )}
         {yt && !show && (
-          <button type="button" className="chip" style={{ minHeight: 32 }} onClick={() => setShow(true)}>
+          <button type="button" className="chip" onClick={() => setShow(true)}>
             ▶ Videoyu izle
           </button>
         )}

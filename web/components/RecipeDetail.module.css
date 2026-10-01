@@ -21,8 +21,8 @@
 }
 
 .badges button {
-  min-height: 32px;
-  min-width: auto;
+  min-height: var(--tap);
+  padding: 8px 14px;
 }
 
 .meta {

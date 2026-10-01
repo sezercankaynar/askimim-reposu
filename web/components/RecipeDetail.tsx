@@ -14,11 +14,11 @@ import SourceEmbed from "./SourceEmbed";
 
 const LOW_CONFIDENCE = 0.6;
 
-export default function RecipeDetail({ recipe, logs, userId }: { recipe: Recipe; logs: CookLog[]; userId: string }) {
+export default function RecipeDetail({ recipe, logs, userId, openMade = false }: { recipe: Recipe; logs: CookLog[]; userId: string; openMade?: boolean }) {
   const router = useRouter();
   const [factorIdx, setFactorIdx] = useState(1);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const [madeOpen, setMadeOpen] = useState(false);
+  const [madeOpen, setMadeOpen] = useState(openMade);
   const [note, setNote] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);

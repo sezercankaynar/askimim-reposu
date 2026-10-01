@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const PUBLIC_PATHS = ["/", "/giris", "/auth", "/kurulum", "/manifest.webmanifest", "/icons", "/sw.js", "/offline"];
+const PUBLIC_PATHS = ["/", "/giris", "/auth", "/kurulum", "/onizleme", "/manifest.webmanifest", "/icons", "/sw.js", "/offline"];
 
 /** Oturum çerezini tazeler; giriş yapılmamışsa korunan sayfaları /giris'e yönlendirir. */
 export async function proxy(request: NextRequest) {

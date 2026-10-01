@@ -254,12 +254,25 @@ h3 {
   resize: vertical;
 }
 
+input[type="file"] {
+  min-height: var(--tap);
+  padding: 8px 0;
+  width: 100%;
+}
+
+.link-inline {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  text-decoration: underline;
+}
+
 /* ===== Chip ===== */
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 36px;
+  min-height: var(--tap);
   padding: 6px 14px;
   border-radius: 999px;
   background: #fff;
