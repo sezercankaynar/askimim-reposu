@@ -73,9 +73,9 @@ Arayüz tüm adımları canlı gösterir: *Link inceleniyor → Video indiriliyo
 ### 1. Supabase
 
 1. https://supabase.com → **New project**. Bir ad ve güçlü bir veritabanı şifresi verin, bölge olarak **Frankfurt (eu-central-1)** seçin.
-2. Proje açılınca sol menüden **SQL Editor** → **New query**. Şu iki dosyanın içeriğini sırayla yapıştırıp **Run** deyin:
-   - `supabase/migrations/0001_init.sql` (tablolar, güvenlik kuralları, depolama)
-   - `supabase/migrations/0002_queue.sql` (iş kuyruğu fonksiyonları)
+2. Proje açılınca sol menüden **SQL Editor** → **New query**. `supabase/setup.sql` dosyasının içeriğini yapıştırıp **Run** deyin (iki migration'ın birleşik hâli; birden fazla kez çalıştırmak güvenlidir).
+   - **Telefon/tabletten kopyalıyorsanız:** GitHub'daki dosya sayfasında **Raw** düğmesine basın (ya da `raw.githubusercontent.com/.../supabase/setup.sql` adresini açın), sayfadaki metnin tamamını seçip kopyalayın. Böylece satır numaraları gelmez. Biçimin (girinti, satır sonları) bozulması sorun değildir; SQL bunları önemsemez.
+   - Ayrı ayrı çalıştırmak isterseniz: `supabase/migrations/0001_init.sql` sonra `0002_queue.sql`.
 3. **Authentication → Providers → Email**: açık olsun. "Confirm email" kapalı kalabilir (giriş bağlantısı zaten e-postayla gelir).
 4. **Authentication → URL Configuration**:
    - *Site URL*: Vercel adresiniz (örn. `https://tarif-defterim.vercel.app`) — 2. adımdan sonra doldurun.
