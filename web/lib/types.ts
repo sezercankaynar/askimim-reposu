@@ -53,6 +53,7 @@ export type ImportStatus =
 export interface ImportJob {
   id: string;
   user_id: string;
+  kind: "url" | "screenshots";
   url: string;
   normalized_url: string | null;
   platform: string | null;

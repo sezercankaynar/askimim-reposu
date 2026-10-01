@@ -1,17 +1,31 @@
 import Link from "next/link";
 import LinkBoxConnected from "@/components/LinkBoxConnected";
 import RecipeCard from "@/components/RecipeCard";
-import { countByStatus, listRecipes } from "@/lib/recipes";
+import ImportProgress from "@/components/ImportProgress";
+import { countByStatus, listActiveImports, listRecipes } from "@/lib/recipes";
+import { getUser } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
-export default async function ContentsPage() {
-  const [counts, recent] = await Promise.all([countByStatus(), listRecipes()]);
+export default async function ContentsPage({ searchParams }: { searchParams: Promise<{ paylasim?: string; mesaj?: string }> }) {
+  const sp = await searchParams;
+  const [counts, recent, imports, user] = await Promise.all([countByStatus(), listRecipes(), listActiveImports(), getUser()]);
   const latest = recent.slice(0, 6);
 
   return (
     <main>
       <LinkBoxConnected />
+      {sp.paylasim === "linkyok" && (
+        <p role="alert" className="notice notice--warn">
+          Paylaşılan içerikte bir link bulunamadı.
+        </p>
+      )}
+      {sp.paylasim === "hata" && (
+        <p role="alert" className="notice notice--error">
+          {sp.mesaj ?? "Link eklenemedi."}
+        </p>
+      )}
+      <ImportProgress initial={imports} userId={user?.id ?? ""} />
       <section className="paper">
         <h1>İçindekiler</h1>
         <ul className="toc">

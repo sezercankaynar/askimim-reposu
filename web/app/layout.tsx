@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Caveat, Nunito } from "next/font/google";
+import PwaRegister from "@/components/PwaRegister";
 import "@/styles/globals.css";
 
 const fraunces = Fraunces({
@@ -35,7 +36,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="tr" className={`${fraunces.variable} ${caveat.variable} ${nunito.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <PwaRegister />
+      </body>
     </html>
   );
 }
