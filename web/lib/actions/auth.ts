@@ -1,11 +1,16 @@
 "use server";
 
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-function siteUrl() {
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+/** Uygulamanın dışarıdan görünen adresi: env > istek başlıkları > localhost */
+async function siteUrl() {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
+  const h = await headers();
+  const host = h.get("x-forwarded-host") ?? h.get("host");
+  const proto = h.get("x-forwarded-proto") ?? (host?.startsWith("localhost") ? "http" : "https");
+  if (host) return `${proto}://${host}`;
   return "http://localhost:3000";
 }
 
@@ -13,7 +18,7 @@ export async function signInWithGoogle(next: string) {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
-    options: { redirectTo: `${siteUrl()}/auth/callback?next=${encodeURIComponent(next)}` },
+    options: { redirectTo: `${await siteUrl()}/auth/callback?next=${encodeURIComponent(next)}` },
   });
   if (error || !data.url) redirect("/giris?hata=google");
   redirect(data.url);
@@ -28,7 +33,7 @@ export async function signInWithEmail(_prev: EmailState, formData: FormData): Pr
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithOtp({
     email,
-    options: { emailRedirectTo: `${siteUrl()}/auth/callback?next=${encodeURIComponent(next)}` },
+    options: { emailRedirectTo: `${await siteUrl()}/auth/callback?next=${encodeURIComponent(next)}` },
   });
   if (error) return { error: "Bağlantı gönderilemedi. Birkaç dakika sonra tekrar deneyin." };
   return { message: `Giriş bağlantısı ${email} adresine gönderildi. E-postanızı açıp bağlantıya dokunun.` };

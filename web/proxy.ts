@@ -6,6 +6,15 @@ const PUBLIC_PATHS = ["/", "/giris", "/auth", "/kurulum", "/onizleme", "/manifes
 /** Oturum çerezini tazeler; giriş yapılmamışsa korunan sayfaları /giris'e yönlendirir. */
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Supabase giriş kodu yanlış sayfaya düşerse (ör. kök sayfa) callback'e yönlendir
+  const code = request.nextUrl.searchParams.get("code");
+  if (code && !pathname.startsWith("/auth/callback")) {
+    const cb = new URL("/auth/callback", request.url);
+    cb.searchParams.set("code", code);
+    cb.searchParams.set("next", request.nextUrl.searchParams.get("next") ?? "/defter");
+    return NextResponse.redirect(cb);
+  }
   const isPublic = PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"));
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
