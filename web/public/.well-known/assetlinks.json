@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.tarifdefterim.app",
+      "sha256_cert_fingerprints": [
+        "AF:A6:C2:B3:DF:1F:05:85:C6:6F:8F:DA:6B:60:C8:1C:D4:57:80:0B:8B:85:05:3B:8D:F7:4A:CD:5F:C8:D1:8A"
+      ]
+    }
+  }
+]
