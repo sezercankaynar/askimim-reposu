@@ -7,7 +7,7 @@ import { getUser } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
-export default async function ContentsPage({ searchParams }: { searchParams: Promise<{ paylasim?: string; mesaj?: string }> }) {
+export default async function ContentsPage({ searchParams }: { searchParams: Promise<{ paylasim?: string; mesaj?: string; sifre?: string }> }) {
   const sp = await searchParams;
   const [counts, recent, imports, user] = await Promise.all([countByStatus(), listRecipes(), listActiveImports(), getUser()]);
   const latest = recent.slice(0, 6);
@@ -25,6 +25,7 @@ export default async function ContentsPage({ searchParams }: { searchParams: Pro
           {sp.mesaj ?? "Link eklenemedi."}
         </p>
       )}
+      {sp.sifre === "ok" && <p className="notice notice--ok">Şifren kaydedildi. Artık e-posta ve şifreyle giriş yapabilirsin.</p>}
       <ImportProgress initial={imports} userId={user?.id ?? ""} />
       <section className="paper">
         <h1>İçindekiler</h1>
@@ -68,11 +69,16 @@ export default async function ContentsPage({ searchParams }: { searchParams: Pro
             ))}
           </div>
         )}
-        <form action="/auth/cikis" method="post" style={{ marginTop: 32, textAlign: "right" }}>
-          <button type="submit" className="btn btn--ghost" style={{ fontSize: 13 }}>
-            Çıkış yap
-          </button>
-        </form>
+        <div style={{ marginTop: 32, display: "flex", justifyContent: "flex-end", gap: 8, flexWrap: "wrap" }}>
+          <Link href="/hesap/sifre" className="btn btn--ghost" style={{ fontSize: 13 }}>
+            Şifre değiştir
+          </Link>
+          <form action="/auth/cikis" method="post">
+            <button type="submit" className="btn btn--ghost" style={{ fontSize: 13 }}>
+              Çıkış yap
+            </button>
+          </form>
+        </div>
       </section>
     </main>
   );
