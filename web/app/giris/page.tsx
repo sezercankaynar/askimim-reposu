@@ -11,7 +11,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     <main className="page">
       <section className="paper paper--plain" style={{ minHeight: "auto", marginTop: 40 }}>
         <h1>Giriş yap</h1>
-        <p style={{ color: "var(--ink-soft)", marginTop: 0 }}>Defterin yalnızca sana özel. Giriş yapınca tariflerin her cihazda seninle gelir.</p>
+        <p style={{ color: "var(--ink-soft)", marginTop: 0 }}>Defterin yalnızca sana özel. E-posta ve şifrenle giriş yap; tariflerin her cihazda seninle gelir.</p>
         {hata && (
           <p role="alert" className="notice notice--error">
             Giriş tamamlanamadı. Lütfen tekrar deneyin.
