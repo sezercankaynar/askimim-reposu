@@ -1,0 +1,17 @@
+{
+  "name": "tarif-defterim-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tarif Defterim Android kabuğu (Capacitor)",
+  "scripts": {
+    "sync": "cap sync android",
+    "apk": "cd android && ./gradlew assembleRelease"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7",
+    "@capacitor/core": "^7"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7"
+  }
+}

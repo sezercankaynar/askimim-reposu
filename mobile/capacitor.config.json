@@ -1,0 +1,14 @@
+{
+  "appId": "com.tarifdefterim.app",
+  "appName": "Tarif Defterim",
+  "webDir": "www",
+  "server": {
+    "url": "https://askimim-reposu.vercel.app",
+    "cleartext": false,
+    "allowNavigation": ["askimim-reposu.vercel.app", "*.supabase.co", "accounts.google.com"]
+  },
+  "android": {
+    "backgroundColor": "#e9e1d2",
+    "allowMixedContent": false
+  }
+}

@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Tarif Defterim</string>
+    <string name="title_activity_main">Tarif Defterim</string>
+    <string name="package_name">com.tarifdefterim.app</string>
+    <string name="custom_url_scheme">com.tarifdefterim.app</string>
+    <string name="share_label">Tarif Defterim\'e ekle</string>
+</resources>

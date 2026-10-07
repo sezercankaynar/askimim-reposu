@@ -206,6 +206,19 @@ Tasarım kuralları: 360 px genişlikte yatay kaydırma yok, tüm dokunma hedefl
 
 ---
 
+## Android uygulaması (APK)
+
+`mobile/` klasörü siteyi açan bir Android kabuğudur (Capacitor). Paylaş menüsünde "Tarif Defterim'e ekle" seçeneği ekler ve siteye ait linkleri (e-posta giriş bağlantısı dahil) uygulamanın içinde açar.
+
+```bash
+cd mobile && npm install
+export ANDROID_HOME=/opt/android-sdk   # Android SDK (platform 35, build-tools 35)
+cd android && ./gradlew assembleRelease
+# → android/app/build/outputs/apk/release/app-release.apk
+```
+
+İmza anahtarı `mobile/keystore/tarif-defterim.jks` (şifre: `tarifdefterim`). Yayınlanmayan kişisel sürüm için depoda tutulur; mağazaya çıkarmadan önce yeni bir anahtar üretin. Site adresi değişirse `capacitor.config.json`, `MainActivity.java` ve `web/public/.well-known/assetlinks.json` güncellenir.
+
 ## Sorun giderme
 
 | Belirti | Sebep / çözüm |
