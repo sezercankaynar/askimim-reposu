@@ -84,7 +84,8 @@ export async function sendPasswordReset(_prev: AuthState, formData: FormData): P
   if (!email.includes("@")) return { error: "Geçerli bir e-posta adresi yazın." };
   const supabase = await createClient();
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${await siteUrl()}/auth/callback?next=${encodeURIComponent("/hesap/sifre")}`,
+    // Doğrudan şifre sayfasına döner; gelen ?code proxy tarafından callback'e yönlendirilir
+    redirectTo: `${await siteUrl()}/hesap/sifre`,
   });
   if (error) return { error: "Bağlantı gönderilemedi. Birkaç dakika sonra tekrar deneyin." };
   return {

@@ -12,7 +12,8 @@ export async function proxy(request: NextRequest) {
   if (code && !pathname.startsWith("/auth/callback")) {
     const cb = new URL("/auth/callback", request.url);
     cb.searchParams.set("code", code);
-    cb.searchParams.set("next", request.nextUrl.searchParams.get("next") ?? "/defter");
+    // Kod hangi sayfaya düştüyse giriş sonrası oraya dön (ör. /hesap/sifre)
+    cb.searchParams.set("next", request.nextUrl.searchParams.get("next") ?? (pathname === "/" ? "/defter" : pathname));
     return NextResponse.redirect(cb);
   }
   const isPublic = PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"));
